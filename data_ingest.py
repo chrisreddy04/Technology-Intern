@@ -24,7 +24,8 @@ def transform_data(df):
     })
     
     
-    df['published_date'] = df['published_date'].apply(lambda x: datetime(int(x), 1, 1))
+    df['published_date'] = pd.to_datetime(df['published_date'], format='%Y').dt.date
+
     
    
     numeric_columns = [
@@ -39,6 +40,7 @@ def transform_data(df):
     
    
     df = df.dropna(subset=['country', 'published_date', 'industry'] + numeric_columns)
+    
     
     return df
 

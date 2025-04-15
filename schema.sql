@@ -9,7 +9,8 @@ CREATE TABLE ai_content_impact (
     ai_content_volume_tb NUMERIC(10,2) NOT NULL,
     job_loss_due_to_ai NUMERIC(5,2) NOT NULL,
     revenue_increase_due_to_ai NUMERIC(5,2) NOT NULL,       
-    human_ai_collab_rate NUMERIC(5,2) NOT NULL,         
+    human_ai_collab_rate NUMERIC(5,2) NOT NULL,
+    top_ai_tools_used TEXT NOT NULL,         
     regulation_status VARCHAR(50) NOT NULL,                
     consumer_trust_in_ai NUMERIC(5,2) NOT NULL,             
     market_share_ai_companies NUMERIC(5,2) NOT NULL 
