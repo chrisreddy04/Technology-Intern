@@ -85,7 +85,7 @@ def update_adoption_chart(n_intervals, selected_year):
     fig = px.line(
         df_filtered,
         x="published_date",
-        y="ai_adoption_rate(%)",
+        y="ai_adoption_rate",
         color="industry",
         markers=True,
         line_shape='linear',
@@ -100,6 +100,9 @@ def update_adoption_chart(n_intervals, selected_year):
         margin=dict(l=40, r=40, t=80, b=40),
         height=700
     )
+
+    fig.update_yaxes(title_text="AI Adoption Rate (%)", ticksuffix="%")
+
     return fig
 
 
@@ -117,7 +120,7 @@ def update_jobloss_chart(n_intervals, selected_year):
     fig = px.line(
         df_filtered,
         x="published_date",
-        y="job_loss_due_to_ai(%)",
+        y="job_loss_due_to_ai",
         color="industry",
         markers=True,
         line_shape='linear',
@@ -132,6 +135,9 @@ def update_jobloss_chart(n_intervals, selected_year):
         margin=dict(l=40, r=40, t=80, b=40),
         height=700
     )
+
+    fig.update_yaxes(title_text="Job Loss Due to AI (%)", ticksuffix="%")
+
     return fig
 
 if __name__ == '__main__':
