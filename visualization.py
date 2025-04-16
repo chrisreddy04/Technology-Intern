@@ -34,14 +34,14 @@ server = app.server
 
 
 df_initial = fetch_data()
-df_agg_initial = aggregate_data(df_initial)
+df_agg_initial = aggregate_data(df_initial, 'ai_adoption_rate')
 years = df_agg_initial['year'].unique().tolist()
 min_year = int(min(years))
 max_year = int(max(years))
 
 app.layout = html.Div([
     html.H1("Real-Time AI Content Impact Dashboard", style={'textAlign': 'center'}),
-    html.H3("AI Adoption Rate Over Time by Industry", style={'textAlign': 'center'}),
+    html.H3("AI Adoption and Job Loss Trends Over Time by Industry", style={'textAlign': 'center'}),
     
     html.Div([
         dcc.Slider(
@@ -55,6 +55,8 @@ app.layout = html.Div([
     ], style={'width': '80%', 'padding': '20px', 'margin': 'auto'}),
     
     dcc.Graph(id="live-chart"),
+
+    dcc.Graph(id="jobloss-chart"),
     
     
     dcc.Interval(
@@ -86,6 +88,37 @@ def update_chart(n_intervals, selected_year):
         title=f"AI Adoption Rate Over Time by Industry (up to {selected_year})"
     )
     
+    fig.update_layout(
+        hovermode='x unified',
+        legend_title_text='Industry',
+        template='plotly_white',
+        margin=dict(l=40, r=40, t=80, b=40),
+        height=620
+    )
+    return fig
+
+@app.callback(
+    Output("jobloss-chart", "figure"),
+    [Input("interval-component", "n_intervals"),
+     Input("year-slider", "value")]
+)
+
+def update_jobloss_chart(n_intervals, selected_year):
+    df = fetch_data()
+    df_agg = aggregate_data(df, 'job_loss_due_to_ai')
+    df_filtered = df_agg[df_agg['year'] <= selected_year]
+
+    fig = px.line(
+        df_filtered,
+        x="published_date",
+        y="job_loss_due_to_ai",
+        color="industry",
+        markers=True,
+        line_shape='linear',
+        color_discrete_sequence=px.colors.qualitative.Set3,
+        title=f"Job Loss Due to AI Over Time by Industry (up to {selected_year})"
+    )
+
     fig.update_layout(
         hovermode='x unified',
         legend_title_text='Industry',
