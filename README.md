@@ -8,6 +8,7 @@ This repository contains a comprehensive submission for the Technology Intern Ta
 1. **Datastore Setup:**  
    - **PostgreSQL** is used as the datastore.
    - The `schema.sql` file contains the schema for the `ai_content_impact` table.
+   - Bootstrapped using `init_db.sh` inside the PostgreSQL container.
    - Docker is used to containerize the database, ensuring a consistent development and deployment environment.
    - The `docker-compose.yml` file sets up the PostgreSQL database and its dependencies.
    - The `docker-compose up` command can be used to start the database container.
@@ -30,4 +31,16 @@ This repository contains a comprehensive submission for the Technology Intern Ta
    - The dashboard is accessible at [http://localhost:8050] when running the Docker setup.
    - Please refer visualization.md file for detailed script.
 
+4. **Environment Setup:**
+   - Dependencies are defined in `requirements.txt`.
+   - Docker containers are orchestrated using `docker-compose.yml` to spin up:
+     - PostgreSQL database
+     - Ingestion service
+     - Dashboard UI
+   - Everything is isolated and reproducible.   
 
+5. **Project Automation (init_db.sh):**
+   - `init_db.sh` is a helper script used to initialize the database manually if needed (when not relying on Docker’s automatic schema injection).
+   - It connects to the running PostgreSQL container and applies the `schema.sql` to set up the database schema.
+
+---
