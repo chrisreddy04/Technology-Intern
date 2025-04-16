@@ -1,4 +1,4 @@
-# data_ingest.py
+
 import os
 import numpy as np
 import pandas as pd
@@ -8,7 +8,7 @@ from datetime import datetime
 
 def transform_data(df):
    
-    # Rename columns based on our mapping
+   
     df = df.rename(columns={
         'Country': 'country',
         'Year': 'published_date',  
@@ -77,10 +77,8 @@ def insert_data(df):
     for record in raw_data_tuples:
         new_record = []
         for item in record:
-            # If item is a NumPy datetime, convert using pandas Timestamp
             if isinstance(item, np.datetime64):
                 new_item = pd.Timestamp(item).to_pydatetime()
-            # If item is a NumPy generic numeric type, convert it to a native Python float/int using .item()
             elif isinstance(item, np.generic):
                 new_item = item.item()
             else:
