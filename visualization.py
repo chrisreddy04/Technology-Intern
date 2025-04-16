@@ -98,7 +98,7 @@ def update_adoption_chart(n_intervals, selected_year):
         legend_title_text='Industry',
         template='plotly_white',
         margin=dict(l=40, r=40, t=80, b=40),
-        height=700
+        height=620
     )
 
     fig.update_yaxes(title_text="AI Adoption Rate (%)", ticksuffix="%")
@@ -133,7 +133,7 @@ def update_jobloss_chart(n_intervals, selected_year):
         legend_title_text='Industry',
         template='plotly_white',
         margin=dict(l=40, r=40, t=80, b=40),
-        height=700
+        height=620
     )
 
     fig.update_yaxes(title_text="Job Loss Due to AI (%)", ticksuffix="%")
